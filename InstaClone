@@ -25,6 +25,7 @@ import javax.swing.JFileChooser;
 import java.awt.GridLayout;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
+import java.awt.FlowLayout;
 
 /**
  * Class InstaClone, this class contains the main method as
@@ -38,6 +39,8 @@ public class InstaClone extends JFrame {
 	int count = 0;
 	private JPanel contentPane;
 	public List <String> imagepaths = new ArrayList<>();
+	//The below file path will need to be altered to the location of users image folder within the package.******************
+	String imagePathPrepend = "/Users/landonhowa/eclipse-workspace/TestInstaClone/src";
 	JProgressBar progressBar;
 	JButton uploadbutton;
 	private JTextField captionTextField;
@@ -128,10 +131,9 @@ public class InstaClone extends JFrame {
 		uploadbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				count++;
-				//The below file path will need to be altered to the location of users image folder within the package.******************
-				File newFile = new File("/Users/landonhowa/eclipse-workspace/TestInstaClone/src/images/image" + count + ".jpg");
+				File newFile = new File(imagePathPrepend + "/images/image" + count + ".jpg");
 				fileToSave.renameTo(newFile);
-				imagepaths.add("/image/image" + count + ".jpg");//adds image path to array
+				imagepaths.add("/images/image" + count + ".jpg");//adds image path to array
 				//System.out.println(imagepaths);
 				imageUploadCaption = captionTextField.getText();//set variable to image caption
 				//System.out.println(imageUploadCaption);
@@ -188,20 +190,41 @@ public class InstaClone extends JFrame {
 		 * On press of Refresh, the event handler should query the imagepath array, then create a new JLabel
 		 * using the image path to set the background.
 		 */
+		JPanel imagePanel = new JPanel();
 		
 		JButton homeRefreshButton = new JButton("Refresh...");
 		homeRefreshButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for (String p : imagepaths) {
-					//add an image and caption at the index
-					JLabel testLabel = new JLabel("Test worked");
-					testLabel.setHorizontalAlignment(SwingConstants.CENTER);
-					scrollPane.setViewportView(testLabel);
-				}
+				//Test data below *******************
+				JLabel imageLabel1 = new JLabel();
+				imageLabel1.setIcon(new ImageIcon(imagePathPrepend + imagepaths.get(0).toString()));
+				imageLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+				imageLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+				JLabel textLabel1 = new JLabel();
+				textLabel1.setText(imageCaptions.get(0));
+				JLabel imageLabel2 = new JLabel();
+				imageLabel2.setIcon(new ImageIcon(imagePathPrepend + imagepaths.get(1).toString()));
+				imageLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+				imageLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+				JLabel textLabel2 = new JLabel();
+				textLabel2.setText(imageCaptions.get(1));
+
+				imagePanel.add( imageLabel1 );
+				imagePanel.add( textLabel1 );
+				imagePanel.add( imageLabel2 );
+				imagePanel.add( textLabel2 );
+
+				scrollPane.setViewportView(imagePanel);
+				//End Test **********************
+				
+				//This will be used to generate a new label forEach image Path in the array.
+//				for (String p : imagepaths) {
+//				}
 			}
 		});
 		homePanel.add(homeRefreshButton, BorderLayout.SOUTH);
-		scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane( imagePanel );
+		imagePanel.setLayout(new GridLayout(0, 1, 0, 0));
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		homePanel.add(scrollPane, BorderLayout.CENTER);
 		
