@@ -49,19 +49,27 @@ public class InstaClone extends JFrame {
 	JLabel filePathLabel;
 	int count = 0;
 	private JPanel contentPane;
-	public List <String> imagepaths = new ArrayList<>();
 	JProgressBar progressBar;
 	JButton uploadbutton;
-	private JTextField captionTextField;
-	String imageUploadCaption;
-	public List <String> imageCaptions = new ArrayList<>();
-	JScrollPane scrollPane;
 	JButton uploadMenuButton = new JButton("Upload");
 	JButton homeMenuButton = new JButton("Home");
 	JButton profileMenuButton = new JButton("Profile");
-	ImagePanel images; 
-	String imagePathPrepend = "/Users/landonhowa/eclipse-workspace/TestInstaClone/src";
 	JPanel imagePanel = new JPanel();//Creates the panel to store the images. This will later be placed on the scrollPane
+	
+
+	//The below file path will need to be altered to the location of users image folder within the package.******************
+	String imagePathPrepend = "/Users/landonhowa/eclipse-workspace/TestInstaClone/src/images/";
+	String stockImagePathPrepend = "/Users/landonhowa/eclipse-workspace/TestInstaClone/src/stockImages/";
+	
+	private JTextField captionTextField;
+	String imageUploadCaption;
+	public List <String> imagepaths = new ArrayList<>();
+	public List <String> imageCaptions = new ArrayList<>();
+	
+	public List <String> stockImageCaptions = new ArrayList<>();
+	public List <String> stockImagepaths = new ArrayList<>();
+	JScrollPane scrollPane;
+	
 	
 	/**
 	 * Launch the application.
@@ -143,11 +151,7 @@ public class InstaClone extends JFrame {
 		subUploadPanel.setForeground(new Color(0, 0, 0));
 		uploadPanel.add(subUploadPanel);
 		subUploadPanel.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		
-		
-		
-		
+				
 		filePathLabel = new JLabel("Select a file to upload");
 		filePathLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		filePathLabel.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -181,14 +185,12 @@ public class InstaClone extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				count++;
 				//The below file path will need to be altered to the location of users image folder within the package.******************
-				File newFile = new File(imagePathPrepend + "/images/image" + count + ".jpg");
+				File newFile = new File(imagePathPrepend + "image" + count + ".jpg");
 				fileToSave.renameTo(newFile);
-				
-				
-				imagepaths.add("/instaClone/workingimages/" + count + ".jpg");//adds image path to array
-				System.out.println(imagepaths);
+				imagepaths.add("image" + count + ".jpg");//adds image path to array
+				//System.out.println(imagepaths);
 				imageUploadCaption = captionTextField.getText();//set variable to image caption
-				System.out.println(imageUploadCaption);
+				//System.out.println(imageUploadCaption);
 				imageCaptions.add(imageUploadCaption);//adds caption to array
 				progressBar.setValue(100);
 				captionTextField.setText("");
@@ -198,6 +200,12 @@ public class InstaClone extends JFrame {
 				
 			}
 		});
+		
+		
+		
+		/**
+		 * Allows you to browse for images, "uploads" the image,  then saves the filepath to the array.
+		 */		
 		browseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser fileChooser = new JFileChooser();
@@ -235,7 +243,10 @@ public class InstaClone extends JFrame {
 		 * using the image path to set the background.
 		 */
 		
-		//AT I removed the refresh button and linked it to the home button. So now when the user clicks the home button it will auto refresh. 
+		/**
+		 * @ author Amelia 
+		 *  I removed the refresh button and linked it to the home button. So now when the user clicks the home button it will auto refresh. 
+		 */
 		
 		/*JButton homeRefreshButton = new JButton("Refresh...");
 		homeRefreshButton.addActionListener(new ActionListener() {
@@ -256,19 +267,35 @@ public class InstaClone extends JFrame {
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		homePanel.add(scrollPane, BorderLayout.CENTER);
 		
-
-
-		//Amelia Playing with the other class trying to get it ot work from here
-		/*
-		images = new ImagePanel();
 		
-		
-		
-		scrollPane.setViewportView(images);
-		//to here
-		*/
-		
-
+		JLabel stockImageLabel1 = new JLabel();//creates a label to house the first image
+		stockImageLabel1.setIcon(new ImageIcon(stockImagePathPrepend + stockImagepaths.get(0).toString()));//sets image to first position in array
+		stockImageLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		stockImageLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		imagePanel.add( stockImageLabel1 );//forcing first image in array and adding to imagePanel
+		JLabel stockTextLabel1 = new JLabel();//creates a label to house the first caption
+		stockTextLabel1.setHorizontalAlignment(SwingConstants.CENTER);
+		stockTextLabel1.setText(stockImageCaptions.get(0));//sets text tom first caption in array
+		imagePanel.add( stockTextLabel1 );
+		JLabel stockImageLabel2 = new JLabel();//creates a label to house the first image
+		stockImageLabel2.setIcon(new ImageIcon(stockImagePathPrepend + stockImagepaths.get(1).toString()));//sets image to first position in array
+		stockImageLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		stockImageLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		imagePanel.add( stockImageLabel2 );//forcing first image in array and adding to imagePanel
+		JLabel stockTextLabel2 = new JLabel();//creates a label to house the second caption
+		stockTextLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		stockTextLabel2.setText(stockImageCaptions.get(1));//sets text tom second caption in array
+		imagePanel.add( stockTextLabel2 );
+		JLabel stockImageLabel3 = new JLabel();//creates a label to house the second image
+		stockImageLabel3.setIcon(new ImageIcon(stockImagePathPrepend + stockImagepaths.get(2).toString()));//sets image to second position in array
+		stockImageLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		stockImageLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		imagePanel.add( stockImageLabel3 );//forcing third image in array and adding to imagePanel
+		JLabel stockTextLabel3 = new JLabel();//creates a label to house the third caption
+		stockTextLabel3.setHorizontalAlignment(SwingConstants.CENTER);
+		stockTextLabel3.setText(stockImageCaptions.get(2));//sets text to third caption in array
+		imagePanel.add( stockTextLabel3 );
+			
 		
 		return homePanel;
 	}
@@ -355,23 +382,20 @@ public class InstaClone extends JFrame {
 		homeMenuButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (String p : imagepaths) {
-					//add an image and caption at the index
-					JLabel testLabel = new JLabel("Test worked");
-					testLabel.setHorizontalAlignment(SwingConstants.CENTER);
-					scrollPane.setViewportView(testLabel);
-					System.out.println("Refresh worked");
-					
+					//Test data below *******************
 					JLabel imageLabel1 = new JLabel();//creates a label to house the first image
 					imageLabel1.setIcon(new ImageIcon(imagePathPrepend + imagepaths.get(0).toString()));//sets image to first position in array
 					imageLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 					imageLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 					JLabel textLabel1 = new JLabel();//creates a label to house the first caption
+					textLabel1.setHorizontalAlignment(SwingConstants.CENTER);
 					textLabel1.setText(imageCaptions.get(0));//sets text tom first caption in array
 					JLabel imageLabel2 = new JLabel();//creates a label to house the second image
 					imageLabel2.setIcon(new ImageIcon(imagePathPrepend + imagepaths.get(1).toString()));//sets the image to second image in array
 					imageLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 					imageLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 					JLabel textLabel2 = new JLabel();//creates the second label for the second caption
+					textLabel2.setHorizontalAlignment(SwingConstants.CENTER);
 					textLabel2.setText(imageCaptions.get(1));//sets the text to be the second in the caption array
 
 					imagePanel.add( imageLabel1 );//forcing first image in array and adding to imagePanel
