@@ -25,7 +25,6 @@ import javax.swing.JFileChooser;
 import java.awt.GridLayout;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
-import java.awt.FlowLayout;
 
 /**
  * Class InstaClone, this class contains the main method as
@@ -74,7 +73,7 @@ public class InstaClone extends JFrame {
 		
 		/**
 		 * Generates the menu bar, navigates to the
-		 * three pages.
+		 * three pages with current UI.
 		 */
 		menuBarMethod();
 		contentPane.setLayout(new CardLayout(0, 0));
@@ -112,6 +111,7 @@ public class InstaClone extends JFrame {
 	}
 	
 	/********************************************************************************* End Profile Page */
+
 	private JPanel uploadPagePanelMethod() {
 		JPanel uploadPanel = new JPanel();
 		uploadPanel.setLayout(new GridLayout(0, 1, 0, 0));
@@ -145,7 +145,9 @@ public class InstaClone extends JFrame {
 		});
 		
 
-		
+		/**
+		 * Allows you to browse for images, "uploads" the image,  then saves the filepath to the array.
+		 */
 		JButton browseButton = new JButton("Browse...");
 		browseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -183,38 +185,32 @@ public class InstaClone extends JFrame {
 		JLabel homeLabel = new JLabel("Home");
 		homePanel.add(homeLabel, BorderLayout.NORTH);
 		homeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		/**
-		 * TODO
-		 * Images to be added below in scrollPane in a single column? forEachLoop through imagePaths arrayList?
-		 * Padding between images will need to be added.
-		 * On press of Refresh, the event handler should query the imagepath array, then create a new JLabel
-		 * using the image path to set the background.
-		 */
-		JPanel imagePanel = new JPanel();
+
+		JPanel imagePanel = new JPanel();//Creates the panel to store the images. This will later be placed on the scrollPane
 		
 		JButton homeRefreshButton = new JButton("Refresh...");
 		homeRefreshButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Test data below *******************
-				JLabel imageLabel1 = new JLabel();
-				imageLabel1.setIcon(new ImageIcon(imagePathPrepend + imagepaths.get(0).toString()));
+				JLabel imageLabel1 = new JLabel();//creates a label to house the first image
+				imageLabel1.setIcon(new ImageIcon(imagePathPrepend + imagepaths.get(0).toString()));//sets image to first position in array
 				imageLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 				imageLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-				JLabel textLabel1 = new JLabel();
-				textLabel1.setText(imageCaptions.get(0));
-				JLabel imageLabel2 = new JLabel();
-				imageLabel2.setIcon(new ImageIcon(imagePathPrepend + imagepaths.get(1).toString()));
+				JLabel textLabel1 = new JLabel();//creates a label to house the first caption
+				textLabel1.setText(imageCaptions.get(0));//sets text tom first caption in array
+				JLabel imageLabel2 = new JLabel();//creates a label to house the second image
+				imageLabel2.setIcon(new ImageIcon(imagePathPrepend + imagepaths.get(1).toString()));//sets the image to second image in array
 				imageLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 				imageLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-				JLabel textLabel2 = new JLabel();
-				textLabel2.setText(imageCaptions.get(1));
+				JLabel textLabel2 = new JLabel();//creates the second label for the second caption
+				textLabel2.setText(imageCaptions.get(1));//sets the text to be the second in the caption array
 
-				imagePanel.add( imageLabel1 );
-				imagePanel.add( textLabel1 );
-				imagePanel.add( imageLabel2 );
-				imagePanel.add( textLabel2 );
+				imagePanel.add( imageLabel1 );//forcing first image in array and adding to imagePanel
+				imagePanel.add( textLabel1 );//forcing first caption in array and adding to imagePanel
+				imagePanel.add( imageLabel2 );//forcing second image in array and adding to imagePanel
+				imagePanel.add( textLabel2 );//forcing second image in array and adding to imagePanel
 
-				scrollPane.setViewportView(imagePanel);
+				scrollPane.setViewportView(imagePanel);//adds the image panel to the scrollPane itself
 				//End Test **********************
 				
 				//This will be used to generate a new label forEach image Path in the array.
@@ -223,8 +219,8 @@ public class InstaClone extends JFrame {
 			}
 		});
 		homePanel.add(homeRefreshButton, BorderLayout.SOUTH);
-		scrollPane = new JScrollPane( imagePanel );
-		imagePanel.setLayout(new GridLayout(0, 1, 0, 0));
+		scrollPane = new JScrollPane( imagePanel );//adds the imagePanel to the scrollPanel
+		imagePanel.setLayout(new GridLayout(0, 1, 0, 0));//Forces 1 by 1 images
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		homePanel.add(scrollPane, BorderLayout.CENTER);
 		
