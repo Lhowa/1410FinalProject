@@ -39,7 +39,7 @@ public class InstaClone extends JFrame {
 	private JPanel contentPane;
 	public List <String> imagepaths = new ArrayList<>();
 	//The below file path will need to be altered to the location of users image folder within the package.******************
-	String imagePathPrepend = "/Users/landonhowa/eclipse-workspace/TestInstaClone/src";
+	String imagePathPrepend = "/Users/landonhowa/eclipse-workspace/TestInstaClone/src/images/";
 	JProgressBar progressBar;
 	JButton uploadbutton;
 	private JTextField captionTextField;
@@ -131,9 +131,9 @@ public class InstaClone extends JFrame {
 		uploadbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				count++;
-				File newFile = new File(imagePathPrepend + "/images/image" + count + ".jpg");
+				File newFile = new File(imagePathPrepend + "image" + count + ".jpg");
 				fileToSave.renameTo(newFile);
-				imagepaths.add("/images/image" + count + ".jpg");//adds image path to array
+				imagepaths.add("image" + count + ".jpg");//adds image path to array
 				//System.out.println(imagepaths);
 				imageUploadCaption = captionTextField.getText();//set variable to image caption
 				//System.out.println(imageUploadCaption);
