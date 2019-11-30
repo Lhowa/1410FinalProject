@@ -92,7 +92,9 @@ public class InstaClone extends JFrame {
 		JPanel liveFeedPanel = profilePagePanelMethod();
 		contentPane.add(liveFeedPanel, "p3");
 	}
-
+	
+	/*Begin Profile Page*********************************************************************************/
+	
 	private JPanel profilePagePanelMethod() {
 		JPanel profilePanel = new JPanel();
 		profilePanel.setLayout(new BorderLayout(0, 0));
@@ -151,7 +153,7 @@ public class InstaClone extends JFrame {
 		
 	}
 	
-	/********************************************************************************* End Profile Page */
+	/*Begin Upload Page******************************************************************************** End Profile Page */
 
 	private JPanel uploadPagePanelMethod() {
 		JPanel uploadPanel = new JPanel();
@@ -218,7 +220,7 @@ public class InstaClone extends JFrame {
 		return uploadPanel;
 	}
 	
-	/********************************************************************************* End Upload Page */
+	/*Begin Home Page******************************************************************************** End Upload Page */
 	
 	private JPanel homePagePanelMethod() {
 		JPanel homePanel = new JPanel();
